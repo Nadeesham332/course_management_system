@@ -6,10 +6,9 @@ const app = express();
 
 var db = createConnection({
   host:'localhost',
-  user:'admin',
-  password:'admin',
-  database:'cms_db',
-  timezone: 'utc'
+  user:'root',
+  password:'',
+  database:'course_management_system'
   });
 
   db.connect(function(err) {
