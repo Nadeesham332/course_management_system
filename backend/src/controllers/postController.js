@@ -24,12 +24,17 @@ exports.getAllPosts = async (req, res, next) => {
 // };
 
 exports.getPostById = async (req, res, next) => {
+
   try {
     let postId = req.params.id;
 
     let [post, _] = await Post.findById(postId);
-
-    res.status(200).json({ post: post[0] });
+    // console.log(post[0]);
+    if(post[0])
+      res.status(200).json({ post: post[0] });
+    else
+      res.status(404).send("Something went wrong!");
+    
   } catch (error) {
     next(error);
   }

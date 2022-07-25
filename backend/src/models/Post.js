@@ -40,7 +40,7 @@ class Post {
   }
 
   static findById(id) {
-    let sql = `SELECT * FROM course WHERE Course_code = ${id};`;
+    let sql = `SELECT * FROM course WHERE Course_code = '${id}';`;
 
     return db.execute(sql);
   }
