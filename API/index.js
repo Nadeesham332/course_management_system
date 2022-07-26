@@ -4,12 +4,15 @@ import {courseFilter } from './dbCalls/courseFilter.mjs';
 import { getCourseData } from './dbCalls/getCourseData.mjs';
 const app = express();
 
-var db = createConnection({
+const config = {
   host:'localhost',
-  user:'root',
-  password:'',
-  database:'course_management_system'
-  });
+  user:'admin',
+  password:'admin',
+  database:'cms_db',
+  timezone: 'utc'
+}
+
+var db = createConnection(config);
 
   db.connect(function(err) {
     if (err) throw err;

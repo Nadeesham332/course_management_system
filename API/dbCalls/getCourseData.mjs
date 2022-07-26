@@ -3,9 +3,10 @@ export function getCourseData(req,db) {
 
     if(courseCode !="null"){
         return new Promise((resolve, reject)=>{
-            const quaryStrig = "CALL feach_course_data_01();";
+            const quaryStrig = "CALL course_data(?);";
             db.query(
                 quaryStrig,
+                courseCode,
                 (err, results)=>{
                   resolve(results)
                 }
