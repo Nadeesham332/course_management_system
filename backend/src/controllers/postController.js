@@ -29,7 +29,7 @@ exports.getPostById = async (req, res, next) => {
     let postId = req.params.id;
 
     let [post, _] = await Post.findById(postId);
-    // console.log(post[0]);
+    console.log(post[0]);
     if(post[0])
       res.status(200).json({ post: post[0] });
     else

@@ -2,6 +2,7 @@ import express from 'express';
 import { createConnection } from 'mysql';
 import {courseFilter } from './dbCalls/courseFilter.mjs';
 import { getCourseData } from './dbCalls/getCourseData.mjs';
+import { seduledCourses} from './dbCalls/seduledCourses.mjs'
 const app = express();
 
 const config = {
@@ -22,12 +23,17 @@ var db = createConnection(config);
 app.get('/courses', async (req, res)=>{
 
   //const results = await courseFilter(req, db);
-  res.send("under developing");
+  res.send(" list of all courses -> under developing");
 })
 
 app.get('/courseData', async (req, res)=>{
 
   const results = await getCourseData(req, db);
+  res.send(results);
+})
+app.get('/seduledCourse', async (req, res)=>{
+
+  const results = await seduledCourses(req, db);
   res.send(results);
 })
 
