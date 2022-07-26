@@ -27,9 +27,10 @@ CREATE TABLE `shedulling` (
   `semester` tinyint NOT NULL,
   `course_code` varchar(6) NOT NULL,
   `coordinator` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`academic_year`,`semester`,`course_code`),
-  KEY `shedulling_to_course` (`course_code`),
+  `department` tinyint NOT NULL,
+  PRIMARY KEY (`academic_year`,`semester`,`course_code`,`department`),
   KEY `shedulling_to_users` (`coordinator`),
+  KEY `shedulling_to_course` (`course_code`),
   CONSTRAINT `shedulling_to_course` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
   CONSTRAINT `shedulling_to_users` FOREIGN KEY (`coordinator`) REFERENCES `users` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -41,6 +42,7 @@ CREATE TABLE `shedulling` (
 
 LOCK TABLES `shedulling` WRITE;
 /*!40000 ALTER TABLE `shedulling` DISABLE KEYS */;
+INSERT INTO `shedulling` VALUES ('2020/2021',6,'EE6030','ahilan@eng.jfn.ac.lk',3),('2020/2021',6,'EC9630','pratheeba@eng.jfn.ac.lk',3),('2020/2021',6,'EC9630','pratheeba@eng.jfn.ac.lk',4),('2020/2021',6,'EC6060','yaalini@eng.jfn.ac.lk',4);
 /*!40000 ALTER TABLE `shedulling` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-25 17:50:31
+-- Dump completed on 2022-07-26 20:53:11
