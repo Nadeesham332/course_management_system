@@ -21,8 +21,8 @@ var db = createConnection(config);
 
 app.get('/courses', async (req, res)=>{
 
-  const results = await courseFilter(req, db);
-  res.send(results);
+  //const results = await courseFilter(req, db);
+  res.send("under developing");
 })
 
 app.get('/courseData', async (req, res)=>{
