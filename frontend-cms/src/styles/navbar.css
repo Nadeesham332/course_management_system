@@ -23,6 +23,7 @@
   .navigation-menu ul {
     display: flex;
     padding: 0;
+    text-align: center;
   }
   .navigation-menu li {
     /* // removes default disc bullet for li tags and applies margin to left & right side */
@@ -66,6 +67,11 @@
     .navigation-menu ul {
       display: none;
     
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .navigation-menu.expanded ul {
+      display: block;
     }
   }
 

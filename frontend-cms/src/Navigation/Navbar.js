@@ -1,7 +1,8 @@
 import React from "react";
 import "../styles/navbar.css"
-
+import { useState } from "react"
 const Navbar = () => {
+  const [isNavExpanded, setIsNavExpanded] = useState(false)
   return (
     // <nav className="navbar navbar-expand-lg navbar-light bg-light">
     //   <a className="navbar-brand" href="#">
@@ -67,9 +68,11 @@ const Navbar = () => {
     // </nav>
     <nav className="navigation">
       <a href="/" className="brand-name">
-        MacroSoft
+        Course Management System
       </a>
-      <button className="hamburger">
+      <button className="hamburger"  onClick={() => {
+          setIsNavExpanded(!isNavExpanded);
+        }}>
         {/* icon from heroicons.com */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +88,9 @@ const Navbar = () => {
         </svg>
       </button>
       <div
-        className="navigation-menu">
+        className={
+          isNavExpanded ? "navigation-menu expanded" : "navigation-menu"
+        }>
         <ul>
           <li>
             <a href="/home">Home</a>
