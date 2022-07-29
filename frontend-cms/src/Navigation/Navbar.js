@@ -1,7 +1,10 @@
 import React from "react";
 import "../styles/navbar.css"
 import { useState } from "react"
+<<<<<<< HEAD
 import "bootstrap/dist/css/bootstrap.min.css";
+=======
+>>>>>>> 9280dbcfdb06d2209235f54e20cb21e343888b65
 
 
 const Navbar = () => {
@@ -41,10 +44,13 @@ const Navbar = () => {
           <li>
             <a href="/contact">Contact</a>
           </li>
-          <li>
-            <a href="/login">LogIn</a>
-          </li>
+          <li><a href="/login">LogIn</a></li>
+
         </ul>
+        {/* <ul className="secondary-nav">
+                        <li><label className='font-weight-bold'>LogIn</label></li>
+                    
+                    </ul> */}
       </div>
     </nav>
 
