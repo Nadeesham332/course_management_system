@@ -101,6 +101,9 @@ const Navbar = () => {
           <li>
             <a href="/contact">Contact</a>
           </li>
+          <li>
+            <a href="/contact">LogIn</a>
+          </li>
         </ul>
       </div>
     </nav>
