@@ -1,11 +1,32 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import Navbar from "./Navigation/Navbar.js";
+// import Home from './Pages/Home';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
-    </div>
+    <Navbar/>
+    // <Home></Home>
+      //   <Router>
+      //   <div className="App">
+      //     <div className="content">
+      //       <Routes>
+      //         <Route exact path="/">
+      //           <Home></Home>
+      //         </Route>
+      //         {/* <Route exact path="/About">
+      //           <About />
+      //         </Route>
+      //         <Route exact path="/Contact-us">
+      //           <Contact />
+      //         </Route> */}
+      //         {/* <Route path='*'>
+      //           <NotFound />
+      //         </Route> */}
+      //       </Routes>
+      //     </div>
+      //   </div>
+      // </Router>
   );
 }
 

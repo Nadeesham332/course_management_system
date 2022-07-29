@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/navbar.css"
 import { useState } from "react"
+
+
 const Navbar = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false)
   return (
@@ -101,7 +103,12 @@ const Navbar = () => {
           <li>
             <a href="/contact">Contact</a>
           </li>
+          <li><a href="/login">LogIn</a></li>
         </ul>
+        {/* <ul className="secondary-nav">
+                        <li><label className='font-weight-bold'>LogIn</label></li>
+                    
+                    </ul> */}
       </div>
     </nav>
 
