@@ -3,11 +3,11 @@ export function insertEvaluationDetails(course_code,assessment_method,percentage
         
 
         return new Promise((resolve, reject) =>{
-                const sqlquery = "CALL course_data(?);";
-                const values = "EE6060";
+               // const sqlquery = "CALL course_data(?);";
+                //const values = "EE6060";
 
-               //const sqlquery = "CALL insert_evaluation_details(?,?,?);";
-                //const values = [course_code,assessment_method,percentage];
+                const sqlquery = "CALL insert_evaluation_details(?,?,?);";
+                const values = [course_code,assessment_method,percentage];
                 db.query(sqlquery, values, (err, results)=>{
                     console.log("quary runing ===> insertEvaluationDetails");
                     if(err){

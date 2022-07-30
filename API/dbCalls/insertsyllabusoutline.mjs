@@ -3,12 +3,9 @@ export function insertsyllabusoutline(courseCode, topic,discription,l_h,t_h,l_f_
         
 
         return new Promise((resolve, reject) =>{
-                const sqlquery = "CALL course_data(?);";
-                const value = "EE6060";
-                //const sqlquery  = "CALL insert_syllabus_outline(?,?,?,?,?,?,?);"
-                //const values = [courseCode, topic,discription,l_h,t_h,l_f_h,a_h];
-                //console.log(values)
-                db.query(sqlquery, value, (err, results)=>{
+                const sqlquery  = "CALL insert_syllabus_outline(?,?,?,?,?,?,?);"
+                const values = [courseCode, topic,discription,l_h,t_h,l_f_h,a_h];
+                db.query(sqlquery, values, (err, results)=>{
                     if(err){
                         console.log(err);
                         reject(err);

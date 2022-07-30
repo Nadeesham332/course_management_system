@@ -1,0 +1,240 @@
+
+URL 01 :localhost:3000/insertcoursedata
+
+        jason Body :
+
+        {
+            "courseCode": "EC4010",
+            "parentcourse": "NULL",
+            "core_elective" :1,
+            "title":"Digital Design",
+            "credits":"3",
+            "learningOutcome" : "design combinational logic circuits using Boolean optimization techniques;",
+            "usermail":"kanesh@eng.jfn.ac.lk",
+            "userpw" :"123"
+        }
+
+        Sample success response ====>
+
+        {
+            "fieldCount": 0,
+            "affectedRows": 1,
+            "insertId": 0,
+            "serverStatus": 2,
+            "warningCount": 0,
+            "message": "",
+            "protocol41": true,
+            "changedRows": 0
+        }
+
+        Sample Errror response ====>
+
+        {
+            "code": "insertEvaluationDetails ROUTE NOT FIRE",
+            "errno": 5000,
+        }
+
+        {
+            "code": "ER_DATA_TOO_LONG",
+            "errno": 1406,
+            "sqlMessage": "Data too long for column 'in_title' at row 1",
+            "sqlState": "22001",
+            "index": 0,
+            "sql": "CALL insert_course_data('EC4010','null','Digital Design',1,'3','design combinational logic circuits using Boolean optimization techniques;');"
+        }
+
+
+URL 02 : localhost:3000/insertEvaluationDetails
+
+    jsons Body :
+
+        {   "courseCode": "EC4010",
+            "assignment":[
+                {
+                    "asignmnetMethod": "Assignment",
+                    "pracentage":15
+                },
+                {
+                    "asignmnetMethod": "Lab / Field Work",
+                    "pracentage":15
+                },
+                {
+                    "asignmnetMethod": "Mid Semester Assessment",
+                    "pracentage":20
+                },
+                {
+                    "asignmnetMethod": "End Semester Examination",
+                    "pracentage":50
+                }
+            ],
+            "usermail":"kanesh@eng.jfn.ac.lk",
+            "userpw" :"123"
+        }
+
+    Sample success response ===>
+
+        {
+            "fieldCount": 0,
+            "affectedRows": 1,
+            "insertId": 0,
+            "serverStatus": 2,
+            "warningCount": 0,
+            "message": "",
+            "protocol41": true,
+            "changedRows": 0
+        }
+
+    Error sample response ===>
+
+        {
+            "code": "insertEvaluationDetails ROUTE THROW ERROR",
+            "errno": 5011
+        }
+
+
+URL 03 : localhost:3000/insertAllowedDepartments
+
+    json Body ===>
+
+        {
+            "courseCode": "EC4010",
+            "allowedDepartments":[3,4],
+            "usermail":"kanesh@eng.jfn.ac.lk",
+            "userpw" :"123"
+        }
+
+    Sample success response ===>
+
+        {
+            "fieldCount": 0,
+            "affectedRows": 1,
+            "insertId": 0,
+            "serverStatus": 2,
+            "warningCount": 0,
+            "message": "",
+            "protocol41": true,
+            "changedRows": 0
+        }
+
+    Sample Error Response ===>
+
+
+        {
+            "code": "insertAllowedDepartments ROUTE NOT FIRE",
+            "errno": 5020
+        }
+
+URL 04 : localhost:3000/insertprerequisites
+
+    json Body ===>
+
+        {
+            "courseCode": "EC4010",
+            "prerequisites": ["EC3010", "EC2010"],
+            "usermail":"kanesh@eng.jfn.ac.lk",
+            "userpw" :"123"
+        }
+
+    Sample success response ===>
+
+        {
+            "fieldCount": 0,
+            "affectedRows": 1,
+            "insertId": 0,
+            "serverStatus": 2,
+            "warningCount": 0,
+            "message": "",
+            "protocol41": true,
+            "changedRows": 0
+        }
+    
+    sample error response ==>
+
+        {
+            "code": "insertprerequisites ROUTE THROW ERROR",
+            "errno": 5031
+        }
+
+
+URL 05 : localhost:3000/insertsyllabusoutline
+
+    json Body ===>
+
+        {
+            "courseCode": "EC4010",
+            "syllabusOutline": [ {
+                "topic": "Introduction to digital logic",
+                "discription": "Digital signals, Digital Logic, Number Systems, Computers and Digital Systems, TTL/ CMOS, Purpose and role of digital logic in computer engineering, CMOS logic circuits",
+                "l_h" :"2",
+                "t_h":"0",
+                "l_f_h":"0",
+                "a_h":"0"
+            },
+            {
+                "topic": "Combinational logic circuits",
+                "discription": "Boolean Algebra, Boolean laws and theorems, Sum-of products and Product-of-sums methods Simplifications of Boolean expressions, Truth tables, Karnaugh Maps, Quine Mc-Clusky method, Don’t care combinations, Eliminaton of timing Hazards, Introducton to HDLs",
+                "l_h" :"4",
+                "t_h":"0",
+                "l_f_h":"3",
+                "a_h":"0"
+            }
+            ],
+            "usermail":"kanesh@eng.jfn.ac.lk",
+            "userpw" :"123"
+        }
+
+    sample sussess response ===>
+
+        {
+            "fieldCount": 0,
+            "affectedRows": 1,
+            "insertId": 0,
+            "serverStatus": 2,
+            "warningCount": 0,
+            "message": "",
+            "protocol41": true,
+            "changedRows": 0
+        }
+
+    sample Errror response ====>
+
+        {
+            "code": "insertsyllabusoutline ROUTE THROW ERROR",
+            "errno": 5041
+        }
+
+
+
+URL 06 : localhost:3000/insertTextReference
+
+    json Body ===>
+
+        {
+            "courseCode": "EC4010",
+            "refferance":[
+                "M. Morris Mano, and Michael D. Ciletti, Digital Design with an introduction to Veilog HDL, VHDL, and System Verilog, 6th Edition, Pearson, 2017: ISBN-13: 978-0134549897", "John F. Wakerly, Digital Design: Principles and Practices with Verilog, 5th Edition, Pearson, 2017: ISBN-13: 978-0134460093","Wayne Wolf, FPGA-Based System Design, 1st Edition, Prentice Hall, 2004: ISBN 13: 978-0137033485"
+            ],
+            "usermail":"kanesh@eng.jfn.ac.lk",
+            "userpw" :"123"
+        }
+
+    sample sussess response ===>
+
+        {
+            "fieldCount": 0,
+            "affectedRows": 1,
+            "insertId": 0,
+            "serverStatus": 2,
+            "warningCount": 0,
+            "message": "",
+            "protocol41": true,
+            "changedRows": 0
+        }
+
+    sample Errror response ====>
+
+        {
+            "code": "insertTextReference ROUTE THROW ERROR",
+            "errno": 5051
+        }
+

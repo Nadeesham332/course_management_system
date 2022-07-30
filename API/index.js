@@ -62,63 +62,74 @@ app.get('/seduledCourse', async (req, res)=>{
 })
 
 app.post('/insertcoursedata', async (req, res)=>{
+  
 try {
-  const results1 = await insertcoursedata(req, db);
-  console.log("response sent1", results1);
-  res.send(results1)
+  const results = await insertcoursedata(req, db);
+  console.log("response sent = >", results);
+  res.send(results)
 } catch (error) {
   res.send(error)
 }
 })
 
 app.post('/insertEvaluationDetails', async (req, res)=>{
-  let results = {"error":true};
-  console.log( "req.body.course_code   ",req.body.courseCode)
+  let results = {
+    "code": "insertEvaluationDetails ROUTE NOT FIRE",
+    "errno": 5010,
+};
 
   for(let i =0; i<req.body.assignment.length; i++){
     try {
-      results = await insertEvaluationDetails(req.body.course_code,req.body.assignment[i].assessment_method,req.body.assignment[i].percentage,db);
-      console.log("runing round: ==> " , i);
-      console.log("response sent2 - " , results)
+      results = await insertEvaluationDetails(req.body.courseCode,req.body.assignment[i].asignmnetMethod,req.body.assignment[i].pracentage,db);
     } catch (err) {
-      results = {"error":true};
+      results = results = {
+        "code": "insertEvaluationDetails ROUTE THROW ERROR",
+        "errno": 5011,
+    };
       break;
     }
      
   }
+  console.log("insertEvaluationDetails route fired....")
   res.send(results) 
   })
 
   //insertAllowedDepartments
   app.post('/insertAllowedDepartments', async (req, res)=>{
-    let results = {"error":true};
-    console.log( "req.body.course_code   ",req.body.courseCode)
-  
+    let results = {
+      "code": "insertAllowedDepartments ROUTE NOT FIRE",
+      "errno": 5020
+    };
+
     for(let i =0; i<req.body.allowedDepartments.length; i++){
       try {
-        results = await insertAllowedDepartments(req.body.course_code,req.body.allowedDepartments[i],db);
-        console.log("runing round: ==> " , i);
-        console.log("response sent2 - " , results)
+        results = await insertAllowedDepartments(req.body.courseCode,req.body.allowedDepartments[i],db);
       } catch (err) {
-        results = {"error":true};
+        results = results = {
+          "code": "insertAllowedDepartments THROW ERROR",
+          "errno": 5021
+        };
         break;
       }
-       
     }
+    console.log("insertAllowedDepartments route fired...")
     res.send(results) 
     }) 
     
     app.post('/insertprerequisites', async (req, res)=>{
-      let results = {"error":true,"discription":"DB call method body did not fire, intial error"};
-      console.log( "req.body.course_code   ",req.body.prerequisites)
+      let results = {
+        "code": "insertprerequisites ROUTE NOT FIRE",
+        "errno": 5030
+      };
     
       for(let i =0; i<req.body.prerequisites.length; i++){
         try {
-          results = await insertprerequisites(req.body.course_code,req.body.prerequisites[i],db);
-          console.log("runing round: ==> " , i);
-          console.log("response sent2 - " , results)
+          results = await insertprerequisites(req.body.courseCode,req.body.prerequisites[i],db);
         } catch (err) {
-          results = {"error":true, "discription":"Error in mysql query running"};
+          results = {
+            "code": "insertprerequisites ROUTE THROW ERROR",
+            "errno": 5031
+          };
           break;
         }
          
@@ -129,16 +140,19 @@ app.post('/insertEvaluationDetails', async (req, res)=>{
       //syllabusOutline
 
       app.post('/insertsyllabusoutline', async (req, res)=>{
-        let results = {"error":true,"discription":"DB call method body did not fire, intial error"};
-        console.log( "req.body.course_code   ",req.body.syllabusOutline)
-      
+        let results = {
+          "code": "insertsyllabusoutline ROUTE NOT FIRE",
+          "errno": 5040
+        };
+
         for(let i =0; i<req.body.syllabusOutline.length; i++){
           try {
-            results = await insertsyllabusoutline(req.body.course_code,req.body.syllabusOutline[i].topic,req.body.syllabusOutline[i].discription,req.body.syllabusOutline[i].l_h,req.body.syllabusOutline[i].t_h,req.body.syllabusOutline[i].l_f_h,req.body.syllabusOutline[i].a_h,db);
-            console.log("runing round: ==> " , i);
-            console.log("response sent2 - " , results)
+            results = await insertsyllabusoutline(req.body.courseCode,req.body.syllabusOutline[i].topic,req.body.syllabusOutline[i].discription,req.body.syllabusOutline[i].l_h,req.body.syllabusOutline[i].t_h,req.body.syllabusOutline[i].l_f_h,req.body.syllabusOutline[i].a_h,db);
           } catch (err) {
-            results = {"error":true, "discription":"Error in mysql query running"};
+            results = {
+              "code": "insertsyllabusoutline ROUTE THROW ERROR",
+              "errno": 5041
+            };
             break;
           }
            
@@ -149,16 +163,19 @@ app.post('/insertEvaluationDetails', async (req, res)=>{
               //syllabusOutline
 
       app.post('/insertTextReference', async (req, res)=>{
-        let results = {"error":true,"discription":"DB call method body did not fire, intial error"};
-        console.log( "req.body.course_code   ",req.body.syllabusOutline)
-      
+        let results = {
+          "code": "insertTextReference ROUTE NOT FIRED",
+          "errno": 5050
+        };
+ 
         for(let i =0; i<req.body.refferance.length; i++){
           try {
-            results = await insertTextReference(req.body.course_code,req.body.refferance[i],db);
-            console.log("runing round: ==> " , i);
-            console.log("response sent2 - " , results)
+            results = await insertTextReference(req.body.courseCode,req.body.refferance[i],db);
           } catch (err) {
-            results = {"error":true, "discription":"Error in mysql query running"};
+            results = {
+              "code": "insertTextReference ROUTE THROW ERROR",
+              "errno": 5051
+            };
             break;
           }
            
