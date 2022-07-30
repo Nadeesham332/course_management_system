@@ -5,14 +5,24 @@ export function seduledCourses(req,db) {
 
 
         return new Promise((resolve, reject)=>{
-            const quaryStrig = "CALL schedules(?,?,?);";
+            try{
+                const quaryStrig = "CALL schedules(?,?,?);";
             db.query(
                 quaryStrig,
                 [academicYear,semester,department],
                 (err, results)=>{
-                  resolve(results)
-                }
+                  if(err){
+                    reject(err)
+                  }else{
+                    resolve(results)
+                  }
+                }    
             );
+            }catch(e){
+                throw e;
+            }
+            
+            
             
     });
 
