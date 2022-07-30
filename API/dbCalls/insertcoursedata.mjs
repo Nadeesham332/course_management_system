@@ -45,8 +45,7 @@ db.query(
                         resolve(results)
                     }
                   
-                }
-            );
+}            );
 
 
 */
