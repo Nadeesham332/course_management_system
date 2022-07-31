@@ -7,7 +7,9 @@ import {
   MDBBtn,
   MDBIcon
 } from 'mdb-react-ui-kit';
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 export default function Footer() {
   return (
@@ -50,8 +52,9 @@ export default function Footer() {
                 <MDBIcon icon="home" className="me-2" />
                 Ariviyal Nagar, Killinochchi, Sri Lanka
               </li>
+              
               <li className='text-white'>
-                
+              <MDBIcon icon="envelope" className="me-3" />
                 <a href='https://www.eng.jfn.ac.lk/admin@eng.jfn.ac.lk' className='text-white'>
                 admin@eng.jfn.ac.lk
                   </a>
