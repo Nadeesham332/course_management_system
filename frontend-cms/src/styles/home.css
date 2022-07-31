@@ -2,10 +2,6 @@
   --primary-color: #3994ee;
 }
 
-section {
-    background: #F2F2F2;
-    padding: 5em 2em;
-  }
   
   .primary-cta {
     background: var(--primary-color) !important;
@@ -20,7 +16,7 @@ section {
 
 
 
-  section {
+  section.hero {
     background: #F2F2F2;
     padding: 5em 2em;
   }
