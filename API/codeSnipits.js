@@ -36,3 +36,41 @@
     console.log("eeeee ==>",e)
     res.send({error: true})
   }
+
+
+
+
+  /////////////////////////////////////////////////////////////////////////
+
+
+  app.post('/insertEvaluationDetails', async (req, res)=>{
+  
+    const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+    if(permision[0][0] !=undefined){
+      if(permision[0][0].permision_level>=4){
+        
+
+
+        
+    
+      }else{
+        results = {
+          "code": "insertEvaluationDetails NO ACCESS",
+          "errno": 9999,
+        };
+        res.send(results)
+        }
+  
+    }
+    else{
+      results = {
+        "code": "insertEvaluationDetails NO ACCESS",
+        "errno": 9999,
+      };
+      console.log("you have no permision");
+      res.send(results) 
+    }
+  
+    
+    
+    })
