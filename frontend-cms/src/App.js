@@ -1,6 +1,7 @@
 
 import Home from "./Pages/Home";
 import Catalogue from "./Pages/catalogue";
+import Login from "./Pages/login";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/catalogue" element={<Catalogue />} />
+        </Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
