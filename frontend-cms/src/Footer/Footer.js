@@ -50,7 +50,7 @@ export default function Footer() {
               <ul className='list-unstyled mb-0'>
               <li className='text-white'>
                 <MDBIcon icon="home" className="me-2" />
-                Ariviyal Nagar, Killinochchi, Sri Lanka
+                Ariviyal Nagar, Killinochchi, Sri Lanka.
               </li>
               
               <li className='text-white'>
@@ -66,26 +66,6 @@ export default function Footer() {
               <li className='text-white'>
                 <MDBIcon icon="print" className="me-3" />+94-021-2062161
               </li>
-                {/* <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li> */}
               </ul>
             </MDBCol>
 
@@ -115,60 +95,6 @@ export default function Footer() {
                 </li>
               </ul>
             </MDBCol>
-
-            {/* <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol> */}
           </MDBRow>
         </section>
       </MDBContainer>
