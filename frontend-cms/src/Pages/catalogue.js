@@ -1,126 +1,69 @@
-// import _ from 'lodash'
-// import React, { Component } from 'react'
-// import { Grid, Dropdown, Form } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import Navbar from '../Navigation/Navbar';
 
-// const getOptions = (number, prefix = 'Choice ') =>
-//   _.times(number, (index) => ({
-//     key: index,
-//     text: `${prefix}${index}`,
-//     value: index,
-//   }))
+const Catalogue = () => {
 
-// export default class Catalogue extends Component {
-//   state = {
-//     default: '',
-//     false: '',
-//   }
+  const [acadamicYr,setAcadamicYr]=useState('2022/2021');
+  const [semester,setSemester]=useState('1');
+  const [department,setDepartment]=useState('General');
 
-//   handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  return(
 
-//   render() {
-//     return (
-//       <Grid columns='equal'>
-//         <Grid.Column>
-//           <Form>
-//             <Form.Field>
-//               <label>Default selectOnNavigation</label>
-//               <Dropdown
-//                 selection
-//                 name='default'
-//                 options={getOptions(3)}
-//                 placeholder='I change value on keyboard navigation'
-//                 onChange={this.handleChange}
-//               />
-//             </Form.Field>
-//             <Form.Field>
-//               <label>{'selectOnNavigation={false}'}</label>
-//               <Dropdown
-//                 selectOnNavigation={false}
-//                 selection
-//                 name='false'
-//                 options={getOptions(3)}
-//                 placeholder='I do not change value on keyboard navigation'
-//                 onChange={this.handleChange}
-//               />
-//             </Form.Field>
-//           </Form>
-//         </Grid.Column>
-//         <Grid.Column>
-//           Dropdown values:
-//           <pre>{JSON.stringify(this.state, null, 2)}</pre>
-//         </Grid.Column>
-//       </Grid>
-//     )
-//   }
-// }
+  <>
+  <Navbar/>
 
-import React from 'react'
+  <section className='filter text-center' >
+  <br/>
+     <label>
+    Acadamic Year:
+    <select value={acadamicYr} onChange={(e)=>setAcadamicYr(e.target.value)}>
+      <option value="2022/2021" >2022/2021</option>
+      <option value="2021/2020">2021/2020</option>
+      <option value="2020/2019">2020/2019</option>
+      <option value="2019/2018">2019/2018</option>
+    </select>
 
-import { Dropdown } from 'semantic-ui-react'
-// import Dropdown from 'react-bootstrap/Dropdown';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
+  </label>
+    <label>
+    Semester:
+    <select value={semester}
+    onChange={(e)=>{
+      setSemester(e.target.value)
+      if(e.target.value<4)
+        setDepartment('General')}}>
+      <option value="1" >1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" >5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
 
-const options = [
-  { key: 1, text: 'One', value: 1 },
-  { key: 2, text: 'Two', value: 2 },
-  { key: 3, text: 'Three', value: 3 },
-]
+    </select>
+    </label>
+  {semester>3 && <label>
+    Department:
+    <select  onChange={(e)=>setDepartment(e.target.value)} >
+      <option value="" disabled selected>Select your department</option>
+      <option value="Civil and Environmental">Civil and Environmental</option>
+      <option value="Electrical and Electronic">Electrical and Electronic</option>
+      <option value="Interdiciplinary Studies">Interdiciplinary Studies</option>
+      <option value="Computing" >Computing</option>
+    
+    </select>
 
-const Catalogue = () => (
-  <Dropdown selection options={options} placeholder='Choose an option' />
-)
+  </label>
+  }
 
-export default Catalogue
+  <button disabled={semester>3 && department==='General'}  onClick={()=>{
+    console.log(acadamicYr, semester, department)
+}}>Filter</button>
 
-// import Navbar from '../Navigation/Navbar.js';
-// import Footer from '../Footer/Footer.js';
-// // import Dropdown from 'react-bootstrap/Dropdown';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
-// import { useState } from 'react';
-// import { Button, Dropdown } from 'semantic-ui-react'
+</section>
 
+</>
+);
+}
 
-
-// const Catalogue = () => {
-
-//     const [acadamicYr, setAcadamicYr] = useState('2022/2021');
-
-//     // const acadamicYr= '2022/2021';
-//     const options = [
-//         { key: 'edit', icon: 'edit', text: 'Edit Post', value: 'edit' },
-//         { key: 'delete', icon: 'delete', text: 'Remove Post', value: 'delete' },
-//         { key: 'hide', icon: 'hide', text: 'Hide Post', value: 'hide' },
-//       ]
-
-//     return (
-      
-//         <> 
-        
-//         <Navbar/>
-
-
-//             {/* <ul > */}
-//         {/* <label>Acadamic year: </label>
-//         <DropdownButton id="dropdown-basic-button" title={acadamicYr}>
-//       <Dropdown.Item value>2022/2021</Dropdown.Item>
-//       <Dropdown.Item >2021/2020</Dropdown.Item>
-//       <Dropdown.Item >2020/2019</Dropdown.Item>
-//     </DropdownButton></ul> */}
-//       <Button.Group color='teal'>
-//     <Button>Save</Button>
-//     <Dropdown
-//       className='button icon'
-//       floating
-//       options={options}
-//       trigger={<></>}
-//     />
-//   </Button.Group>
-        
-//         <Footer/>
-//         </>
-       
-        
-//     );
-// }
-
-// export default Catalogue;
+export default Catalogue;
