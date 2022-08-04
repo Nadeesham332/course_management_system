@@ -21,27 +21,33 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(user_ID, password);
+        if (password==='1234' && user_ID==='1234'){
+            // setSuccess(true);
+            let user = {
+                User_id: user_ID
+              }
+              //Add the session
+              localStorage.setItem('user', JSON.stringify(user));
+              console.log(user)
+              window.location.href ='/dean';
+        }
+       else{
+            alert("Login Failed!");
+        }
+
+
         setUser_ID('');
         setPassword('');
-        setSuccess(true);
+       
     }
 
    
 
     return (
-        <>
-            {success ? (
-                <section>
-                    <h1>You are successfully logged in!</h1>
-                    <br />
-                    <p>
-                        <a href='/'>Go to Home</a>
-                    </p>
-                </section>
-            ) : (
+     
                 <>
                 <Navbar></Navbar>
-        <section className='text-center'>
+        <section className='hero text-center'>
             <p ref = {errorRef} className = {errorMessage ? "errorMessage" : "offscreen"} aria-live = "assertive"> {errorMessage} </p>
             <h1>Sign In</h1>
             <form onSubmit={handleSubmit}>
@@ -67,13 +73,14 @@ const Login = () => {
 <div/>
                 <button >Sign In</button>
             </form>
-        </section></>
+        </section>
+<Footer/>
 
+</>
+        )
+    
+     
         
-        )}
-        {/* <Footer/> */}
-        </>
-    )
 }
 
 export default Login
