@@ -1,8 +1,9 @@
-
+// import 'semantic-ui-css/semantic.min.css'
 import Home from "./Pages/Home";
 import Catalogue from "./Pages/catalogue";
 import Login from "./Pages/login";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 
 function App() {
   return (

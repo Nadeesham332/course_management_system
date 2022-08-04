@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect} from 'react';
-
-
+import Navbar from '../Navigation/Navbar';
+import Footer from '../Footer/Footer';
 const Login = () => {
     const userRef = useRef();
     const errorRef = useRef();
@@ -20,11 +20,13 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user_ID, password);
+        // console.log(user_ID, password);
         setUser_ID('');
         setPassword('');
         setSuccess(true);
     }
+
+   
 
     return (
         <>
@@ -33,11 +35,13 @@ const Login = () => {
                     <h1>You are successfully logged in!</h1>
                     <br />
                     <p>
-                        <a href='#'>Go to Home</a>
+                        <a href='/'>Go to Home</a>
                     </p>
                 </section>
             ) : (
-        <section>
+                <>
+                <Navbar></Navbar>
+        <section className='text-center'>
             <p ref = {errorRef} className = {errorMessage ? "errorMessage" : "offscreen"} aria-live = "assertive"> {errorMessage} </p>
             <h1>Sign In</h1>
             <form onSubmit={handleSubmit}>
@@ -51,7 +55,7 @@ const Login = () => {
                     value = {user_ID}
                     required
                 />
-
+<div/>
                 <label htmlFor="password">password:</label>
                 <input
                     type = "password"
@@ -60,11 +64,14 @@ const Login = () => {
                     value = {password}
                     required
                 />
-
-                <button>Sign In</button>
+<div/>
+                <button >Sign In</button>
             </form>
-        </section>
+        </section></>
+
+        
         )}
+        {/* <Footer/> */}
         </>
     )
 }
