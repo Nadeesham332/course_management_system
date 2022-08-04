@@ -1,18 +1,21 @@
 import React from "react";
-import "../styles/navbar.css"
-import { useState } from "react"
+import "../styles/navbar.css";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navbar = () => {
-  const [isNavExpanded, setIsNavExpanded] = useState(false)
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
         Course Management System
       </a>
-      <button className="hamburger"  onClick={() => {
+      <button
+        className="hamburger"
+        onClick={() => {
           setIsNavExpanded(!isNavExpanded);
-        }}>
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -29,7 +32,8 @@ const Navbar = () => {
       <div
         className={
           isNavExpanded ? "navigation-menu expanded" : "navigation-menu"
-        }>
+        }
+      >
         <ul>
           <li>
             <a href="/home">Home</a>
@@ -40,12 +44,12 @@ const Navbar = () => {
           <li>
             <a href="/contact">Contact</a>
           </li>
-          <li><a href="/login">LogIn</a></li>
-
+          <li>
+            <a href="/login">LogIn</a>
+          </li>
         </ul>
       </div>
     </nav>
-
   );
 };
 
