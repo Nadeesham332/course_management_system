@@ -11,9 +11,9 @@ const Catalogue = () => {
 
   <>
   <Navbar/>
-
-  <section className='filter text-center' >
   <br/>
+  <section className='text-center' style={{  justifyContent: "stretch" }} >
+
      <label>
     Acadamic Year:
     <select value={acadamicYr} onChange={(e)=>setAcadamicYr(e.target.value)}>
@@ -22,6 +22,8 @@ const Catalogue = () => {
       <option value="2020/2019">2020/2019</option>
       <option value="2019/2018">2019/2018</option>
     </select>
+    &nbsp;
+    &nbsp;
 
   </label>
     <label>
@@ -41,6 +43,9 @@ const Catalogue = () => {
       <option value="8">8</option>
 
     </select>
+    &nbsp;
+    &nbsp;
+
     </label>
   {semester>3 && <label>
     Department:
@@ -52,6 +57,8 @@ const Catalogue = () => {
       <option value="Computing" >Computing</option>
     
     </select>
+    &nbsp;
+    &nbsp;
 
   </label>
   }
