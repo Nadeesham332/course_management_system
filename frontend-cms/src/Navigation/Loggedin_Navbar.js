@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navbar = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+
   return (
     <nav className="navigation">
       <a href="/" className="brand-name">
@@ -45,7 +46,9 @@ const Navbar = () => {
             <a href="/contact">Contact</a>
           </li>
           <li>
-            <a href="/login">LogIn</a>
+            <a href="/" onClick={() => localStorage.clear("user")}>
+              LogOut
+            </a>
           </li>
         </ul>
       </div>
