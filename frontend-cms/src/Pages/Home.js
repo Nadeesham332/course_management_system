@@ -1,5 +1,7 @@
 import Navbar from '../Navigation/Navbar.js';
-import '../styles/home.css'
+import '../styles/home.css';
+import uojLogo from '../assets/uojLogo.png';
+import Footer from '../Footer/Footer.js';
 
 const Home = () => {
 
@@ -7,21 +9,19 @@ const Home = () => {
         <> <Navbar/>
 
         <section className="hero">
-                <h2 className='float-center' style={{color:'red'}}>Welcome To Engineering Foundation Institute</h2>
-                {/* <div className="container">
+                
+                <div className="container">
 
                     <div className="left-col">
-
-                        <h1>VIEW YOUR / YOUR STUDENT'S RESULTS</h1>
-                        <a href="/StudentGuardianLogIn" className="primary-cta btn-info ">Click here!</a>
-                        <a href="/CourseSelection" className="watch-sched-cta "  >
-                            <img src={exam} alt="exam calender" />Assessments Schedule
-                        </a>
+                       <h3 >We Are Managing Courses In</h3>
+                <h3 >Faculty of Engineering</h3>
+                <h3 >University of Jaffna</h3>
+                        <a href="/catalogue" className="primary-cta  ">SEE OUR COURSE CATALOGUE</a>
                     </div>
-                    <img src={illustration} className="hero-img" alt="Illustration" />
-                </div> */}
+                    <img src={uojLogo} className="logo-img" alt="uojLogo" />
+                </div>
             </section>
-        
+        <Footer/>
         </>
        
         
