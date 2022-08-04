@@ -5,6 +5,12 @@ import Navbar from "../../Navigation/Loggedin_Navbar";
 
 function Department() {
   const [dept, setDept] = useState("");
+  useEffect(() => {
+    let data = localStorage.getItem("user");
+    data = JSON.parse(data);
+    console.log(data);
+    if (data === null) window.location.href = `/not_found`;
+  }, []);
 
   const { id } = useParams();
   useEffect(() => {
