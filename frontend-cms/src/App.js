@@ -1,11 +1,12 @@
 // import 'semantic-ui-css/semantic.min.css'
 import Home from "./Pages/Home";
-import Catalogue from "./Pages/catalogue";
+import Catalogue from "./Pages/catalogue/catalogue";
 import Login from "./Pages/login";
 import Dean from "./Pages/dean/dean";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./Pages/NotFound";
 import Department from "./Pages/dean/Department";
+import CourseDetails from "./Pages/catalogue/courseDetails"
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/catalogue" element={<Catalogue />} />
+        </Routes>
+        <Routes>
+          <Route path="/catalogue/:id" element={<CourseDetails />} />
         </Routes>
         <Routes>
           <Route path="/login" element={<Login />} />

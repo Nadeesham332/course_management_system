@@ -1,0 +1,12 @@
+@media (max-width: 991px) {
+
+    .ftco-section  .viewCoursesTabel {
+       
+    /* width: auto; */
+     
+      width:100% !important;
+        overflow-x: auto;
+  
+    }
+  
+  }
