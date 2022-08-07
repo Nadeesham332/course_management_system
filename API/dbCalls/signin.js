@@ -1,4 +1,4 @@
-function signing(email,db) {
+/*function signing(email,db) {
     return new Promise((resolve, reject)=>{
         const quaryStrig = "CALL user_verification(?)";
         let feedback = {
@@ -16,4 +16,4 @@ function signing(email,db) {
     });
 }
 
-export default signing;
+export default signing; */
