@@ -1,7 +1,7 @@
 
 URL 01 :localhost:3000/insertcoursedata
 
-        jason Body :
+        json Body :
 
         {
             "courseCode": "EC4010",
@@ -46,7 +46,7 @@ URL 01 :localhost:3000/insertcoursedata
 
 URL 02 : localhost:3000/insertEvaluationDetails
 
-    jsons Body :
+    json Body :
 
         {   "courseCode": "EC4010",
             "assignment":[

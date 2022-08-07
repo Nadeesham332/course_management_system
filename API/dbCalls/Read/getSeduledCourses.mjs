@@ -1,4 +1,4 @@
-export function seduledCourses(req,db) {
+export function getSeduledCourses(req,db) {
     const academicYear = req.query.academicYear;
     const semester = req.query.semester;
     const department = req.query.department;

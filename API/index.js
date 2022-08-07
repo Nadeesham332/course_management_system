@@ -2,7 +2,7 @@ import express from 'express';
 import { createConnection } from 'mysql';
 import {courseFilter } from './dbCalls/courseFilter.mjs';
 import { getCourseData } from './dbCalls/Read/getCourseData.mjs';
-import { seduledCourses} from './dbCalls/Read/getSeduledCourses.mjs'
+import { getSeduledCourses} from './dbCalls/Read/getSeduledCourses.mjs'
 import { insertcourse } from './dbCalls/insertcourse.mjs';
 import { insertcoursedata } from './dbCalls/insert/insertcoursedata.mjs';
 import { insertsyllabusoutline } from './dbCalls/insert/insertsyllabusoutline.mjs';
@@ -51,7 +51,7 @@ app.get('/courseData', async (req, res)=>{
 
 app.get('/seduledCourse', async (req, res)=>{
   try{
-    const results = await seduledCourses(req, db);
+    const results = await getSeduledCourses(req, db);
     res.send(results);
   }catch(e){
     res.send({error: true})

@@ -9,14 +9,9 @@ export function getPermisionLevel(username, pw, db) {
                     reject(err);
                 }
                 resolve(results);
-        
             });
-        });  
-        
+        });        
     } catch (error) {
         throw error;
     }
-
-        
-    
 }
