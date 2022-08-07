@@ -8,7 +8,9 @@ const Catalogue = () => {
   const [acadamicYr, setAcadamicYr] = useState("2022/2021");
   const [semester, setSemester] = useState("1");
   const [department, setDepartment] = useState("General");
-  const [courses,setCourses]=useState([])
+  const [courses,setCourses]=useState([]);
+const [filter,setFilter]=useState(false);
+
   let cnt = -1;
   useEffect(() => {
 
@@ -28,8 +30,9 @@ const Catalogue = () => {
           // setConError(true);
         }
       );
+      // setFilter(false)
 
-  }, [])
+  }, [filter])
 
   return (
     <>
@@ -95,6 +98,8 @@ const Catalogue = () => {
           disabled={semester > 3 && department === "General"}
           onClick={() => {
             console.log(acadamicYr, semester, department);
+            setFilter(!filter);
+            // useEffect();
           }}
         >
           Filter
