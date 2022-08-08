@@ -1,8 +1,32 @@
+import { request } from 'express';
 import React from 'react';
+import supertest from 'supertest';
 import index from './index';
 
-it("Api testing 01", async function() {
-    const response = new index();
-    console.warn(await response.api());
-    expect("hello").toEqual("hello")
-})
+describe("Get /courses", () => {
+
+    describe("Given a username and password", () => {
+
+        test('should respond with a 200 status code', async () => {
+            const response = await request(index).post("/courses").send({
+                course_code: "EC4060",
+                parent_course: "NULL",
+                title:"Computer and Data Networks",
+                state:1 ,
+                core_elective: 1,
+                credits: 3
+            })
+            expect(response.send).toBe("list of all courses -> under developing")
+          
+        })
+        
+        
+    });
+
+    //describe("when the username and password is missing", () => {
+        
+   // });
+    
+    
+    
+});

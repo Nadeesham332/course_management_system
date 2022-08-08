@@ -37,6 +37,7 @@ var db = createConnection(config);
 
 app.get('/courses', async (req, res)=>{
   res.send(" list of all courses -> under developing");
+  res.sendStatus(200);
 })
 
 app.get('/courseData', async (req, res)=>{

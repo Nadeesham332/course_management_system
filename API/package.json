@@ -16,5 +16,10 @@
   "devDependencies": {
     "nodemon": "^2.0.19"
   },
+  "jest" : {
+    "transformIgnorePatterns":["/node_modules/@mdhnpm/(?!react-cube-loading-spinner)"]
+  
+  },
   "description": ""
+  
 }
