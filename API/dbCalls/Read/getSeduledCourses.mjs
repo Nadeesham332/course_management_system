@@ -6,7 +6,7 @@ export function getSeduledCourses(req,db) {
 
         return new Promise((resolve, reject)=>{
             try{
-                const quaryStrig = "CALL schedules(?,?,?);";
+                const quaryStrig = "CALL get_schedules(?,?,?);";
             db.query(
                 quaryStrig,
                 [academicYear,semester,department],
@@ -21,9 +21,6 @@ export function getSeduledCourses(req,db) {
             }catch(e){
                 throw e;
             }
-            
-            
-            
     });
 
     }

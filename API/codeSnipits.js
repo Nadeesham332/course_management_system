@@ -74,3 +74,71 @@
     
     
     })
+
+
+    /////////////////////////////////////////////////////////////////////////////////////
+
+    console.log("runing -01")
+
+    let results = {
+      "code": "courseData ROUTE NOT FIRE",
+      "errno": 6010,
+    };
+  
+    try {
+      results = await getCourseData(req, db);
+      console.log("runing -02")
+  
+      if(results[0][0] !=undefined){
+        console.log("runing -03")
+        results = results[0][0];
+        let prerequties = [];
+        let [firstCall, secondCall, thirdCall] = await Promise.all([
+          getPrerequisites(req, db),
+          getTextReference(req, db),
+          getAllowedDepartments(req, db)
+        ])
+        /*
+        let result_01 = await getPrerequisites(req, db);
+        console.log("runing -05")
+        let result_02 = await getTextReference(req, db);
+        console.log("runing -06")
+        let result_03 = await getAllowedDepartments(req, db);
+        let result_04 = await getEvaluationDetails(req, db);
+        let result_05 = await getSysllubus(req, db);
+        
+        let allowedDepartments = [];
+        let sysllubus =[];
+        let evaluationDetails =[];
+        let getTextReference = [];  */
+  
+        console.log("runing -04")
+  
+        if(result_01[0] != undefined){
+  
+          console.log("runing -05")
+          for(let i =0; i<result_01[0].length; i++){
+            console.log("runing -06")
+            console.log("result_01 ====>", result_01[0][i].prerequisite);
+            prerequties.push(result_01[0][i].prerequisite);
+  
+          }
+          //result_01 = result_01[0];
+          console.log("result_02 ====>", result_02);
+        }
+        
+        console.log("runing -07")
+        console.log("prerequties ====>");
+        results = {...results + prerequties}
+      }else{
+        console.log("runing -07")
+        results = {
+          "code": "courseData No such course",
+          "errno": 6020,
+        };
+      }
+  
+      console.log( "output from route", results)
+      res.send(results);
+    } catch (error) {
+      res.send(results)

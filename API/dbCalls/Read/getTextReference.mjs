@@ -1,8 +1,8 @@
-export function getCourseData(req,db) {
+export function getTextReference(req,db) {
     const courseCode = req.query.courseCode;
     try {
         return new Promise((resolve, reject)=>{
-            const quaryStrig = "CALL get_course_data(?);";
+            const quaryStrig = "CALL get_text_reference(?);";
             db.query(
                 quaryStrig,
                 courseCode,
@@ -11,7 +11,7 @@ export function getCourseData(req,db) {
                         reject(err)
                     }
                     else{
-                        //console.log("results from getCourse Data: ", results);
+                        //console.log("results from getAllowedDepartments Data: ", results);
                         resolve(results)
                     }
                   
@@ -26,4 +26,3 @@ export function getCourseData(req,db) {
         
     
 }
-
