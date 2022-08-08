@@ -1,0 +1,13 @@
+section.greeting {
+    background: #F2F2F2;
+    text-align: right;
+    padding: 1em 1em;
+    font-style: italic;
+  }
+
+  section.dept{
+    text-align: center;
+    background: #F2F2F2;
+    padding: 3em 3em;
+    font-size: 1.3em;
+  }

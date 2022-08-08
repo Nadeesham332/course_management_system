@@ -2,6 +2,7 @@ import Navbar from "../../Navigation/Loggedin_Navbar";
 import Footer from "../../Footer/Footer.js";
 import { useState } from "react";
 import { useEffect } from "react";
+import '../../styles/dean.css'
 
 const Dean = () => {
   const [userID, setUserId] = useState("");
@@ -14,11 +15,24 @@ const Dean = () => {
 
     setUserId(data.User_id);
   }, []);
+
+
+  
   return (
     <>
       <Navbar />
-      <section className="hero text-center">
-        <ul className="list-unstyled mb-0">
+  
+
+
+      <section className="greeting">
+    
+      <h5>Hi, Dr. {userID}</h5>
+      </section>
+  
+      <section className="dept">
+        
+        <ul className="list-unstyled">
+     
           <li>
             <a href="/dean/com">Computer Department</a>
           </li>
@@ -33,6 +47,7 @@ const Dean = () => {
           </li>
         </ul>
       </section>
+      
       <Footer />
     </>
   );
