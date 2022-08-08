@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === "1234" && user_ID === "1234") {
+    if (password === "1234" && user_ID === "1234@e.com") {
       let user = {
         User_id: user_ID,
       };
@@ -48,9 +48,9 @@ const Login = () => {
         </p>
         <h1>Sign In</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="userID">userID:</label>
+          <label htmlFor="userID">e-mail:</label>
           <input
-            type="text"
+            type="email"
             id="userID"
             ref={userRef}
             autoComplete="off"
@@ -59,7 +59,7 @@ const Login = () => {
             required
           />
           <div />
-          <label htmlFor="password">password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
