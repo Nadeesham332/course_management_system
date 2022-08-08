@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import '../../styles/dean.css'
 
+
 const Dean = () => {
   const [userID, setUserId] = useState("");
 
@@ -17,7 +18,7 @@ const Dean = () => {
   }, []);
 
 
-  
+
   return (
     <>
       <Navbar />
