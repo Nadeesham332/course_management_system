@@ -5,20 +5,15 @@ import axios from "axios";
 import '../../styles/catalogue.css'
 
 const Catalogue = () => {
-  const [acadamicYr, setAcadamicYr] = useState("2022/2021");
+  const [acadamicYr, setAcadamicYr] = useState("2022_2021");
   const [semester, setSemester] = useState("1");
-  const [department, setDepartment] = useState("General");
+  const [department, setDepartment] = useState("0");
   const [courses,setCourses]=useState([]);
 const [filter,setFilter]=useState(false);
 
   let cnt = -1;
   useEffect(() => {
 
-    let form = new FormData()
-    form.append('academicYear', acadamicYr)
-    form.append('semester',semester)
-    form.append('department', department)
-    //console.log(form)
     axios.get('http://localhost:3000/seduledCourse', {params: {
       academicYear:"2020_2021",
       semester:6,
@@ -28,6 +23,12 @@ const [filter,setFilter]=useState(false);
         //setCourses(res.data);
         console.log("response=====>", res.data[0]);
       })
+      .catch(
+        (error) => {
+          console.log('Database not connected!');
+          // setConError(true);
+        }
+      );
     
 
   }, [filter])
@@ -43,10 +44,10 @@ const [filter,setFilter]=useState(false);
             value={acadamicYr}
             onChange={(e) => setAcadamicYr(e.target.value)}
           >
-            <option value="2022/2021">2022/2021</option>
-            <option value="2021/2020">2021/2020</option>
-            <option value="2020/2019">2020/2019</option>
-            <option value="2019/2018">2019/2018</option>
+            <option value="2022_2021">2022/2021</option>
+            <option value="2021_2020">2021/2020</option>
+            <option value="2020_2019">2020/2019</option>
+            <option value="2019_2018">2019/2018</option>
           </select>
           &nbsp; &nbsp;
         </label>
@@ -77,23 +78,23 @@ const [filter,setFilter]=useState(false);
               <option value="" disabled selected>
                 Select your department
               </option>
-              <option value="Civil and Environmental">
+              <option value="1">
                 Civil and Environmental
               </option>
-              <option value="Electrical and Electronic">
+              <option value="3">
                 Electrical and Electronic
               </option>
-              <option value="Interdiciplinary Studies">
+              <option value="2">
                 Interdiciplinary Studies
               </option>
-              <option value="Computing">Computing</option>
+              <option value="4">Computing</option>
             </select>
             &nbsp; &nbsp;
           </label>
         )}
 
         <button
-          disabled={semester > 3 && department === "General"}
+          disabled={semester > 3 && department === "0"}
           onClick={() => {
             console.log(acadamicYr, semester, department);
             setFilter(!filter);
