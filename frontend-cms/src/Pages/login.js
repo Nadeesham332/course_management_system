@@ -26,6 +26,13 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(user));
       console.log(user);
       window.location.href = "/dean";
+    } else if (password === "5678" && user_ID === "5678@e.com") {
+      let user = {
+        User_id: user_ID,
+      };
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log(user);
+      window.location.href = "/hod";
     } else {
       alert("Login Failed!");
     }
