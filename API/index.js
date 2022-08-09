@@ -72,7 +72,7 @@ var db = createConnection(config);
   });
 
 
-  app.post('/login',async (req,res) => {
+app.post('/login',async (req,res) => {
     const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
     console.log(permision[0])
     if(permision[0][0] !=undefined){
@@ -87,6 +87,13 @@ var db = createConnection(config);
     }
 })
 
+app.get('/user', async (req, res)=>{
+
+  const results = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+  console.log("fdgdfghd", results)
+  res.send(results);
+  //res.sendStatus(200);
+})
 
 app.get('/courses', async (req, res)=>{
   res.send(" list of all courses -> under developing");
@@ -184,7 +191,7 @@ app.post('/insertcoursedata', async (req, res)=>{
   let results;
   const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
     if(permision[0][0] !=undefined){
-      if(permision[0][0].permision_level>=insertPermissionLevel){
+      if(permision[0][0].permision_level>=insertPermissionLevel && permision[0][0].department ==req.body.department){
         
         try {
           results = await insertcoursedata(req, db);
@@ -223,7 +230,7 @@ app.post('/insertEvaluationDetails', async (req, res)=>{
   };
   const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
   if(permision[0][0] !=undefined){
-    if(permision[0][0].permision_level>=insertPermissionLevel){
+    if(permision[0][0].permision_level>=insertPermissionLevel && permision[0][0].department ==req.body.department){
       for(let i =0; i<req.body.assignment.length; i++){
         try {
           results = await insertEvaluationDetails(req.body.courseCode,req.body.assignment[i].asignmnetMethod,req.body.assignment[i].pracentage,db);
@@ -265,19 +272,37 @@ app.post('/insertAllowedDepartments', async (req, res)=>{
       "errno": 5020
     };
 
-    for(let i =0; i<req.body.allowedDepartments.length; i++){
-      try {
-        results = await insertAllowedDepartments(req.body.courseCode,req.body.allowedDepartments[i],db);
-      } catch (err) {
-        results = results = {
-          "code": "insertAllowedDepartments THROW ERROR",
-          "errno": 5021
-        };
-        break;
+    const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+
+    if(permision[0][0] !=undefined){
+      if(permision[0][0].permision_level>=insertPermissionLevel && permision[0][0].department ==req.body.department){
+      
+        for(let i =0; i<req.body.allowedDepartments.length; i++){
+          try {
+            results = await insertAllowedDepartments(req.body.courseCode,req.body.allowedDepartments[i],db);
+          } catch (err) {
+            results = results = {
+              "code": "insertAllowedDepartments THROW ERROR",
+              "errno": 5021
+            };
+            break;
+          }
+        }
+      }else{
+        results = {
+          "code": "insertprerequisites NO ACCESS",
+          "errno": 9999,}
+          res.send(results)
       }
+    }else{
+      results = {
+        "code": "insertprerequisites NO ACCESS",
+        "errno": 9999,
+      };
+      console.log("you have no permision");
+      res.send(results) 
     }
-    console.log("insertAllowedDepartments route fired...")
-    res.send(results) 
+
 }) 
     
 app.post('/insertprerequisites', async (req, res)=>{
@@ -288,7 +313,7 @@ app.post('/insertprerequisites', async (req, res)=>{
         "errno": 5030
       };
       if(permision[0][0] !=undefined){
-        if(permision[0][0].permision_level>=insertPermissionLevel){
+        if(permision[0][0].permision_level>=insertPermissionLevel && permision[0][0].department ==req.body.department){
         
           for(let i =0; i<req.body.prerequisites.length; i++){
             try {
@@ -331,7 +356,7 @@ app.post('/insertsyllabusoutline', async (req, res)=>{
 
   const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
   if(permision[0][0] !=undefined){
-    if(permision[0][0].permision_level>=insertPermissionLevel){
+    if(permision[0][0].permision_level>=insertPermissionLevel && permision[0][0].department ==req.body.department){
       
       for(let i =0; i<req.body.syllabusOutline.length; i++){
         try {
@@ -373,7 +398,7 @@ app.post('/insertTextReference', async (req, res)=>{
   };
   const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
   if(permision[0][0] !=undefined){
-    if(permision[0][0].permision_level>=insertPermissionLevel){
+    if(permision[0][0].permision_level>=insertPermissionLevel && permision[0][0].department ==req.body.department){
       
       for(let i =0; i<req.body.refferance.length; i++){
         try {
@@ -415,7 +440,7 @@ app.post('/insertTextReference', async (req, res)=>{
   };
   const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
   if(permision[0][0] !=undefined){
-    if(permision[0][0].permision_level>=insertPermissionLevel){
+    if(permision[0][0].permision_level>=insertPermissionLevel && permision[0][0].department ==req.body.department){
       
       for(let i =0; i<req.body.refferance.length; i++){
         try {
@@ -457,7 +482,7 @@ app.post('/updateApproval', async (req, res)=>{
   };
   const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
   if(permision[0][0] !=undefined){
-    if(permision[0][0].permision_level>=approvingPermisionLevel){
+    if(permision[0][0].permision_level>=approvingPermisionLevel && permision[0][0].department ==req.body.department){
       const results = await updateApproval(req, db)
       res.send(results) 
 

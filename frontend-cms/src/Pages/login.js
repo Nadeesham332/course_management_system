@@ -10,8 +10,21 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    userRef.current.focus();
-  }, []);
+
+    axios.get('http://localhost:3000/user', {params: {
+      usermail:"kanesh@eng.jfn.ac.lk",
+      userpw:"123"
+    }}) 
+      .then(res => {
+        setCourses(res.data[0]);
+      })
+      .catch(
+        (error) => {
+          console.log('Database not connected!');
+          // setConError(true);
+        }
+      );
+  }, [filter])
 
   useEffect(() => {
     setErrorMessage("");

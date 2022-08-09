@@ -23,6 +23,8 @@ const hash = bcrypt.hashSync('my password', 'my salt');
                 if(err){
                     reject(err);
                 }
+                console.log("DB Values===>", values)
+                console.log("DB response===>", results)
                 resolve(results);
             });
         });        
