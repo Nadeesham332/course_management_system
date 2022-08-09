@@ -1,4 +1,5 @@
-import express from 'express';
+import express, {json} from 'express';
+import cores from 'cors'
 import { createConnection } from 'mysql';
 import { getCourseData } from './dbCalls/Read/getCourseData.mjs';
 import { getSeduledCourses} from './dbCalls/Read/getSeduledCourses.mjs'
@@ -15,14 +16,45 @@ import { getTextReference } from './dbCalls/Read/getTextReference.mjs';
 import {getEvaluationDetails} from './dbCalls/Read/getEvaluationDetails.mjs'
 import {getSysllubus} from './dbCalls/Read/getSysllubus.mjs'
 import { updateApproval } from './dbCalls/update/updateApproval.mjs';
+//import { json } from 'body-parser';
 
+import cookieParser from 'cookie-parser'
+import sessions from  'express-session'
 
 const insertPermissionLevel = 2;
 const approvingPermisionLevel = 4;
-
 const app = express();
-app.use(express.urlencoded({extended: true}));
-app.use(express.json())
+//app.use(express.urlencoded({extended: true}));
+//app.use(express.json());
+//app.use(cores);
+
+app.use(cores());
+app.use(json())
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+
+// parsing the incoming data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+//username and password
+//const myusername = 'user1'
+//const mypassword = 'mypassword'
+
+// a variable to save a session
+var session;
+
+//serving public file
+//app.use(express.static(__dirname));
+
 
 const config = {
   host:'localhost',
@@ -38,6 +70,23 @@ var db = createConnection(config);
     if (err) throw err;
     console.log("Connected!");
   });
+
+
+  app.post('/login',async (req,res) => {
+    const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+    console.log(permision[0])
+    if(permision[0][0] !=undefined){
+        session=req.session;
+        session.userid=req.body.username;
+        session.permisionLevel = permision[0][0].permision_level;
+        console.log(req.session)
+        res.send(`Valied user`);
+    }
+    else{
+        res.send('Invalid username or password');
+    }
+})
+
 
 app.get('/courses', async (req, res)=>{
   res.send(" list of all courses -> under developing");
@@ -120,8 +169,11 @@ app.get('/courseData', async (req, res)=>{
 })
 
 app.get('/seduledCourse', async (req, res)=>{
+  console.log("seduledCourse   fired", req.query.academicYear);
   try{
+
     const results = await getSeduledCourses(req, db);
+    console.log("dsfgsdfg =====>", results)
     res.send(results);
   }catch(e){
     res.send({error: true})

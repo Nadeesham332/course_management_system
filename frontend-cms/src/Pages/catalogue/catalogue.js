@@ -15,22 +15,20 @@ const [filter,setFilter]=useState(false);
   useEffect(() => {
 
     let form = new FormData()
-    form.append('acadamicYear', acadamicYr)
-    form.append('semster',semester)
+    form.append('academicYear', acadamicYr)
+    form.append('semester',semester)
     form.append('department', department)
-
-    axios.post('http://localhost/viewCourse', form)
+    //console.log(form)
+    axios.get('http://localhost:3000/seduledCourse', {params: {
+      academicYear:"2020_2021",
+      semester:6,
+      department:3
+    }}) 
       .then(res => {
-        setCourses(res.data);
-        // console.log(res.data);
+        //setCourses(res.data);
+        console.log("response=====>", res.data[0]);
       })
-      .catch(
-        (error) => {
-          console.log('Database not connected!');
-          // setConError(true);
-        }
-      );
-      // setFilter(false)
+    
 
   }, [filter])
 
