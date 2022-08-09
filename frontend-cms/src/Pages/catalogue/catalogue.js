@@ -5,23 +5,21 @@ import axios from "axios";
 import '../../styles/catalogue.css'
 
 const Catalogue = () => {
-  const [acadamicYr, setAcadamicYr] = useState("2022_2021");
+  const [acadamicYr, setAcadamicYr] = useState("2020_2021");
   const [semester, setSemester] = useState("1");
   const [department, setDepartment] = useState("0");
   const [courses,setCourses]=useState([]);
-const [filter,setFilter]=useState(false);
+  const [filter,setFilter]=useState(false);
 
-  let cnt = -1;
   useEffect(() => {
 
     axios.get('http://localhost:3000/seduledCourse', {params: {
-      academicYear:"2020_2021",
-      semester:6,
-      department:3
+      academicYear:acadamicYr,
+      semester:semester,
+      department:department
     }}) 
       .then(res => {
-        //setCourses(res.data);
-        console.log("response=====>", res.data[0]);
+        setCourses(res.data[0]);
       })
       .catch(
         (error) => {
@@ -29,8 +27,6 @@ const [filter,setFilter]=useState(false);
           // setConError(true);
         }
       );
-    
-
   }, [filter])
 
   return (
@@ -44,10 +40,10 @@ const [filter,setFilter]=useState(false);
             value={acadamicYr}
             onChange={(e) => setAcadamicYr(e.target.value)}
           >
-            <option value="2022_2021">2022/2021</option>
-            <option value="2021_2020">2021/2020</option>
-            <option value="2020_2019">2020/2019</option>
-            <option value="2019_2018">2019/2018</option>
+            <option value="2020_2021">2020/2021</option>
+            <option value="2019_2020">2019/2020</option>
+            <option value="2018_2019">2018/2019</option>
+            <option value="2017_2018">2017/2018</option>
           </select>
           &nbsp; &nbsp;
         </label>
@@ -57,7 +53,7 @@ const [filter,setFilter]=useState(false);
             value={semester}
             onChange={(e) => {
               setSemester(e.target.value);
-              if (e.target.value < 4) setDepartment("General");
+              if (e.target.value < 4) setDepartment("0");
             }}
           >
             <option value="1">1</option>
@@ -118,19 +114,23 @@ const [filter,setFilter]=useState(false);
                       <th>Course Code</th>
                       <th>Course</th>
                       <th>Credits</th>
+                      {/* <th>Prerequisite/s</th> */}
                       <th className="align-middle">See more</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {courses.map((result) => {
-                      cnt = cnt + 1;
+                    {courses.map((result,i) => {
+                      
+                      // console.log("coures ====> ",result )
                       return (
-                        <tr key={cnt}>
-                          <td className='text-center '>{cnt}</td>
-                          <td >{result.courseCode}</td>
-                          <td className='text-center '>{result.course}</td>
-                          <td className='text-center '>{result.credits}</td>
-                          <td className='text-center'><Button type='button' id={cnt} className='btn-success' ><i className="far fa-eye"></i></Button> </td>
+                        <tr key={i}>
+                          <td className='text-center'>{i+1}</td>
+                          <td >{result.course_code}</td>
+                          <td className='text-center'>{result.title}</td>
+                          <td className='text-center'>{result.credits}</td>
+                          {/* <td className='text-center'>{result.title}</td> */}
+                          {/* <td className='text-center '>{result.credits}</td> */}
+                          <td className='text-center'><Button type='button' id={i} onClick={(e)=>window.location.href=`/catalogue/${result.course_code}`} className='btn-success' ><i className="far fa-eye"></i></Button> </td>
                         </tr>
                       )
                     })}
