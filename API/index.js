@@ -1,9 +1,7 @@
 import express from 'express';
 import { createConnection } from 'mysql';
-import {courseFilter } from './dbCalls/courseFilter.mjs';
 import { getCourseData } from './dbCalls/Read/getCourseData.mjs';
 import { getSeduledCourses} from './dbCalls/Read/getSeduledCourses.mjs'
-import { insertcourse } from './dbCalls/insertcourse.mjs';
 import { insertcoursedata } from './dbCalls/insert/insertcoursedata.mjs';
 import { insertsyllabusoutline } from './dbCalls/insert/insertsyllabusoutline.mjs';
 import { insertprerequisites } from './dbCalls/insert/insertprerequisites.mjs';
@@ -16,10 +14,11 @@ import { getAllowedDepartments } from './dbCalls/Read/getAllowedDepartments.mjs'
 import { getTextReference } from './dbCalls/Read/getTextReference.mjs';
 import {getEvaluationDetails} from './dbCalls/Read/getEvaluationDetails.mjs'
 import {getSysllubus} from './dbCalls/Read/getSysllubus.mjs'
+import { updateApproval } from './dbCalls/update/updateApproval.mjs';
 
 
 const insertPermissionLevel = 2;
-
+const approvingPermisionLevel = 4;
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -45,12 +44,10 @@ app.get('/courses', async (req, res)=>{
 })
 
 app.get('/courseData', async (req, res)=>{
-
   let results = {
     "code": "courseData ROUTE NOT FIRE",
     "errno": 6010,
   };
-
   try {
     let courseData = results;
     let prerequisites = [];
@@ -62,20 +59,10 @@ app.get('/courseData', async (req, res)=>{
     let  result_01 = await getCourseData(req, db);
 
     let result_02 = await getTextReference(req, db);
-    //console.log("\n\ngetTextReference ===>", result_02[0]);
-
     let result_03 = await getAllowedDepartments(req, db);
-    //console.log("\n\ngetAllowedDepartments ===>", result_03[0]);
-
     let result_04 = await getEvaluationDetails(req, db);
-    //console.log("\n\ngetEvaluationDetails ===>", result_04[0]);
-
     let result_05 = await getSysllubus(req, db);
-    //console.log("\n\ngetSysllubus ===>", result_05[0]);
-
     let result_06 = await getPrerequisites(req, db);
-    
-
     if(result_01[0][0] !=undefined){
       console.log("\n\ngetCourseData ===>", result_01[0][0])
       courseData = result_01[0][0];
@@ -128,6 +115,7 @@ app.get('/courseData', async (req, res)=>{
   } catch (error) {
     res.send(results)
   }
+
 })
 
 app.get('/seduledCourse', async (req, res)=>{
@@ -215,10 +203,10 @@ app.post('/insertEvaluationDetails', async (req, res)=>{
     console.log("you have no permision");
     res.send(results) 
   }
-  })
+})
 
   //insertAllowedDepartments
-  app.post('/insertAllowedDepartments', async (req, res)=>{
+app.post('/insertAllowedDepartments', async (req, res)=>{
     let results = {
       "code": "insertAllowedDepartments ROUTE NOT FIRE",
       "errno": 5020
@@ -237,9 +225,9 @@ app.post('/insertEvaluationDetails', async (req, res)=>{
     }
     console.log("insertAllowedDepartments route fired...")
     res.send(results) 
-    }) 
+}) 
     
-    app.post('/insertprerequisites', async (req, res)=>{
+app.post('/insertprerequisites', async (req, res)=>{
 
       const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
       let results = {
@@ -366,4 +354,43 @@ app.post('/insertTextReference', async (req, res)=>{
   }
 
   })
+
+app.post('/updateApproval', async (req, res)=>{
+  let results = {
+    "code": "updateApproval ROUTE NOT FIRED",
+    "errno": 7010
+  };
+  const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+  if(permision[0][0] !=undefined){
+    if(permision[0][0].permision_level>=approvingPermisionLevel){
+      const results = await updateApproval(req, db)
+      res.send(results) 
+
+    }else{
+      results = {
+        "code": "updateApproval NO ACCESS",
+        "errno": 9999,
+      };
+      res.send(results)
+      }
+
+  }
+  else{
+    results = {
+      "code": "updateApproval NO ACCESS",
+      "errno": 9999,
+    };
+    console.log("you have no permision");
+    res.send(results) 
+  }
+
+})
+
+
+
+
+
+
+
+
 app.listen(3000 , ()=> console.log("Listening on port 3000...."))
