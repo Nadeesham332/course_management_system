@@ -1,4 +1,19 @@
+import bcrypt from 'bcryptjs';
+
 export function getPermisionLevel(username, pw, db) {
+
+    /*
+
+    bcrypt.compare('my password', hash, (err, res) => {
+  // res == true or res == false
+});
+
+const hash = bcrypt.hashSync('my password', 'my salt');
+// Store hash password to DB
+
+*/
+
+
     try {
         return new Promise((resolve, reject)=>{
             

@@ -1,8 +1,10 @@
-export function getCourseData(req,db) {
+
+
+export function getPrerequisites(req,db) {
     const courseCode = req.query.courseCode;
     try {
         return new Promise((resolve, reject)=>{
-            const quaryStrig = "CALL get_course_data(?);";
+            const quaryStrig = "CALL get_prerequisites(?);";
             db.query(
                 quaryStrig,
                 courseCode,
@@ -11,7 +13,7 @@ export function getCourseData(req,db) {
                         reject(err)
                     }
                     else{
-                        //console.log("results from getCourse Data: ", results);
+                        //console.log("results from getPrerequisites Data: ", results);
                         resolve(results)
                     }
                   

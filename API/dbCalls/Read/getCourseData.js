@@ -1,5 +1,8 @@
-export function getCourseData(req,db) {
+const db = require('../database.js')
+
+ function getCourseData (req) {
     const courseCode = req.query.courseCode;
+    console.log(courseCode)
     try {
         return new Promise((resolve, reject)=>{
             const quaryStrig = "CALL get_course_data(?);";
@@ -8,10 +11,11 @@ export function getCourseData(req,db) {
                 courseCode,
                 (err, results)=>{
                     if(err){
+                        
                         reject(err)
                     }
                     else{
-                        //console.log("results from getCourse Data: ", results);
+                        console.log("results from getCourse Data: ", results);
                         resolve(results)
                     }
                   
@@ -22,8 +26,8 @@ export function getCourseData(req,db) {
     } catch (error) {
         throw error;
     }
-
-        
-    
 }
 
+
+
+module.exports = getCourseData

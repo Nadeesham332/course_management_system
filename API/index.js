@@ -1,9 +1,7 @@
 import express from 'express';
 import { createConnection } from 'mysql';
-import {courseFilter } from './dbCalls/courseFilter.mjs';
 import { getCourseData } from './dbCalls/Read/getCourseData.mjs';
 import { getSeduledCourses} from './dbCalls/Read/getSeduledCourses.mjs'
-import { insertcourse } from './dbCalls/insertcourse.mjs';
 import { insertcoursedata } from './dbCalls/insert/insertcoursedata.mjs';
 import { insertsyllabusoutline } from './dbCalls/insert/insertsyllabusoutline.mjs';
 import { insertprerequisites } from './dbCalls/insert/insertprerequisites.mjs';
@@ -11,10 +9,16 @@ import { insertAllowedDepartments } from './dbCalls/insert/insertAllowedDepartme
 import { insertEvaluationDetails } from './dbCalls/insert/insertEvaluationDetails.mjs';
 import { insertTextReference } from './dbCalls/insert/insertTextReference.mjs';
 import { getPermisionLevel } from './dbCalls/Read/getPermisionLevel.mjs';
+import { getPrerequisites } from './dbCalls/Read/getPrerequisites.mjs';
+import { getAllowedDepartments } from './dbCalls/Read/getAllowedDepartments.mjs';
+import { getTextReference } from './dbCalls/Read/getTextReference.mjs';
+import {getEvaluationDetails} from './dbCalls/Read/getEvaluationDetails.mjs'
+import {getSysllubus} from './dbCalls/Read/getSysllubus.mjs'
+import { updateApproval } from './dbCalls/update/updateApproval.mjs';
 
 
 const insertPermissionLevel = 2;
-
+const approvingPermisionLevel = 4;
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -41,13 +45,78 @@ app.get('/courses', async (req, res)=>{
 })
 
 app.get('/courseData', async (req, res)=>{
-
+  let results = {
+    "code": "courseData ROUTE NOT FIRE",
+    "errno": 6010,
+  };
   try {
-    const results = await getCourseData(req, db);
+    let courseData = results;
+    let prerequisites = [];
+    let textReference = [];
+    let allowedDepartments = [];
+    let evaluationDetails = [];
+    let sysllabus = [];
+
+    let  result_01 = await getCourseData(req, db);
+
+    let result_02 = await getTextReference(req, db);
+    let result_03 = await getAllowedDepartments(req, db);
+    let result_04 = await getEvaluationDetails(req, db);
+    let result_05 = await getSysllubus(req, db);
+    let result_06 = await getPrerequisites(req, db);
+    if(result_01[0][0] !=undefined){
+      console.log("\n\ngetCourseData ===>", result_01[0][0])
+      courseData = result_01[0][0];
+
+      if(result_06[0] != undefined){
+        for(let i =0; i<result_06[0].length; i++){
+          //console.log("\n\nPrerequisites ===>", result_06[0][i]);
+          prerequisites.push(result_06[0][i].prerequisite)
+        }
+      }
+
+      if(result_02[0] != undefined){
+        for(let i =0; i<result_02[0].length; i++){
+          //console.log("\n\ngetTextReference ===> ", result_02[0][i].text_referance);
+          textReference.push(result_02[0][i].text_referance)
+        }
+      }
+
+      if(result_03[0] != undefined){
+        for(let i =0; i<result_03[0].length; i++){
+          console.log("\n\n getAllowedDepartments ===> ", result_03[0][i].department);
+          allowedDepartments.push(result_03[0][i].department)
+        }
+      }
+
+      if(result_04[0] != undefined){
+        for(let i =0; i<result_04[0].length; i++){
+          console.log("\n\n evaluationDetails ===> ", result_04[0][i]);
+          evaluationDetails.push(result_04[0][i])
+        }
+      }
+
+      if(result_05[0] != undefined){
+        for(let i =0; i<result_05[0].length; i++){
+          console.log("\n\n sysllabus ===> ", result_05[0][i]);
+          sysllabus.push(result_05[0][i])
+        }
+      }
+
+      results = {...courseData, sysllabus, prerequisites, textReference, allowedDepartments, evaluationDetails}
+
+
+    }else{
+      results = {
+        "code": "courseData SUCH COURSE NOT EXIST",
+        "errno": 6030,
+      };
+    }
     res.send(results);
   } catch (error) {
-    res.send({error:true})
+    res.send(results)
   }
+
 })
 
 app.get('/seduledCourse', async (req, res)=>{
@@ -135,10 +204,10 @@ app.post('/insertEvaluationDetails', async (req, res)=>{
     console.log("you have no permision");
     res.send(results) 
   }
-  })
+})
 
   //insertAllowedDepartments
-  app.post('/insertAllowedDepartments', async (req, res)=>{
+app.post('/insertAllowedDepartments', async (req, res)=>{
     let results = {
       "code": "insertAllowedDepartments ROUTE NOT FIRE",
       "errno": 5020
@@ -157,9 +226,9 @@ app.post('/insertEvaluationDetails', async (req, res)=>{
     }
     console.log("insertAllowedDepartments route fired...")
     res.send(results) 
-    }) 
+}) 
     
-    app.post('/insertprerequisites', async (req, res)=>{
+app.post('/insertprerequisites', async (req, res)=>{
 
       const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
       let results = {
@@ -286,4 +355,80 @@ app.post('/insertTextReference', async (req, res)=>{
   }
 
   })
+
+app.post('/insertTextReference', async (req, res)=>{
+  let results = {
+    "code": "insertTextReference ROUTE NOT FIRED",
+    "errno": 5050
+  };
+  const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+  if(permision[0][0] !=undefined){
+    if(permision[0][0].permision_level>=insertPermissionLevel){
+      
+      for(let i =0; i<req.body.refferance.length; i++){
+        try {
+          results = await insertTextReference(req.body.courseCode,req.body.refferance[i],db);
+        } catch (err) {
+          results = {
+            "code": "insertTextReference ROUTE THROW ERROR",
+            "errno": 5051
+          };
+          break;
+        }  
+      }
+      res.send(results) 
+
+    }else{
+      results = {
+        "code": "insertTextReference NO ACCESS",
+        "errno": 9999,
+      };
+      res.send(results)
+      }
+
+  }
+  else{
+    results = {
+      "code": "insertTextReference NO ACCESS",
+      "errno": 9999,
+    };
+    console.log("you have no permision");
+    res.send(results) 
+  }
+  
+})
+
+app.post('/updateApproval', async (req, res)=>{
+  let results = {
+    "code": "updateApproval ROUTE NOT FIRED",
+    "errno": 7010
+  };
+  const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+  if(permision[0][0] !=undefined){
+    if(permision[0][0].permision_level>=approvingPermisionLevel){
+      const results = await updateApproval(req, db)
+      res.send(results) 
+
+    }else{
+      results = {
+        "code": "updateApproval NO ACCESS",
+        "errno": 9999,
+      };
+      res.send(results)
+      }
+
+  }
+  else{
+    results = {
+      "code": "updateApproval NO ACCESS",
+      "errno": 9999,
+    };
+    console.log("you have no permision");
+    res.send(results) 
+  }
+
+})
+
+
+
 app.listen(3000 , ()=> console.log("Listening on port 3000...."))

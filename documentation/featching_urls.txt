@@ -1,0 +1,130 @@
+feating complete details about  course if you konow the course code
+
+URL : localhost:3000/courseData?courseCode=EE9100
+
+if such course exist Successfull response :
+
+        {
+            "title": "Optical Communications",
+            "core_elective": 0,
+            "credits": 2,
+            "learning_outcomes": " Demonstrate the understanding on functionality of each of components in fiber-optic communication system; Demonstrate the understanding on properties of optical fibre that affect performance of a communication link; Demonstrate the understanding of optical system parameters and amplifiers; Design a basic optical communications link; Explain state of the art tools used for design and analysis of optical communication systems;",
+            "sysllabus": [
+                {
+                    "topic": " Optical Amplifiers:",
+                    "discription": "Optical amplification, Semiconductor Amplifiers, Erbium-doped fibre amplifiers, Raman amplifiers, Noise Processes",
+                    "l_h": 3,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 0
+                },
+                {
+                    "topic": " Optical Communications – Introduction and Recent Progress:",
+                    "discription": "",
+                    "l_h": 1,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 0
+                },
+                {
+                    "topic": " Passive Optical Devices",
+                    "discription": "optical couplers, optical filters, wavelength division multiplexers and demultiplexers",
+                    "l_h": 3,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 0
+                },
+                {
+                    "topic": " System design and performance metrics:",
+                    "discription": "Introductions to key system parameters and how they affect performance, Bit-error rate, signal-to-noise ratio",
+                    "l_h": 1,
+                    "t_h": 0,
+                    "l_f_h": 3,
+                    "a_h": 0
+                },
+                {
+                    "topic": " Transmission of Light in Optical Fibres:",
+                    "discription": "guiding of light over optical fibres, modes and fibre types, attenuation, dispersion, nonlinearities",
+                    "l_h": 3,
+                    "t_h": 0,
+                    "l_f_h": 3,
+                    "a_h": 0
+                },
+                {
+                    "topic": " Transmitters and Receivers",
+                    "discription": "Theory of Lasing – Fabry Perot Lasers, Laser diode types, Modulation of Lasers, Directly modulated semiconductor lasers, external modulation; Photodiodes, avalanche photodetectors",
+                    "l_h": 6,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 0
+                },
+                {
+                    "topic": "Design of Optical Communication Links: Link Budgets, Dispersion Management and Multi-channel Systems",
+                    "discription": "",
+                    "l_h": 4,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 0
+                },
+                {
+                    "topic": "Design, Analysis and Simulation Optical Communication Links and Subsystems",
+                    "discription": "(1 or 2 assignments)",
+                    "l_h": 0,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 9
+                },
+                {
+                    "topic": "Electron-Photon Interactions",
+                    "discription": "article nature of light - photon, particle-wave duality, electron photon interactions – spontaneous emission, stimulated emission and recombination",
+                    "l_h": 2,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 0
+                },
+                {
+                    "topic": "Introduction to Optical Networks",
+                    "discription": "Fibre-to-the-home networks, metro and core network architectures, long-haul and ultra long haul transmission systems",
+                    "l_h": 2,
+                    "t_h": 0,
+                    "l_f_h": 0,
+                    "a_h": 0
+                }
+            ],
+            "prerequisites": [
+                "EC5020",
+                "EE4021"
+            ],
+            "textReference": [
+                "Fiber-Optic Communication Systems, 4th Edition, Govind P. Agrawal",
+                "Optical Network Design and Planning (Optical Networks) 2nd ed. 2014 Editionby Jane M. Simmons"
+            ],
+            "allowedDepartments": [
+                "Electrical and Electronic Enginnering"
+            ],
+            "evaluationDetails": [
+                {
+                    "assessment_method": "Assignment",
+                    "percentage": 10
+                },
+                {
+                    "assessment_method": "End Semester Examination",
+                    "percentage": 50
+                },
+                {
+                    "assessment_method": "Lab Report / Field Report ",
+                    "percentage": 20
+                },
+                {
+                    "assessment_method": "Mid Semester Assessment",
+                    "percentage": 20
+                }
+            ]
+        }
+
+if such course  not exist  response :
+
+        {
+            "code": "courseData SUCH COURSE NOT EXIST",
+            "errno": 6030
+        }

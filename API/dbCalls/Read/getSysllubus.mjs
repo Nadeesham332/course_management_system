@@ -1,8 +1,8 @@
-export function getCourseData(req,db) {
+export function getSysllubus(req,db) {
     const courseCode = req.query.courseCode;
     try {
         return new Promise((resolve, reject)=>{
-            const quaryStrig = "CALL get_course_data(?);";
+            const quaryStrig = "CALL get_sysllubus(?);";
             db.query(
                 quaryStrig,
                 courseCode,
@@ -10,8 +10,8 @@ export function getCourseData(req,db) {
                     if(err){
                         reject(err)
                     }
-                    else{
-                        //console.log("results from getCourse Data: ", results);
+                    else{ 
+                        //console.log("results from getSysllubus Data: ", results);
                         resolve(results)
                     }
                   

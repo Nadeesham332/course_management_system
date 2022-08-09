@@ -1,76 +1,87 @@
-
-
-  try{
-    const results1 = await insertcoursedata(req, db);
-    console.log("response sent1", results1)
-    
-    for(let i =0; i<req.body.syllabusOutline.length; i++){
-      try {
-        results2 = await insertsyllabusoutline(req.body.courseCode, req.body.syllabusOutline[i].topic, req.body.syllabusOutline[i].discription,req.body.syllabusOutline[i].l_h,req.body.syllabusOutline[i].t_h,req.body.syllabusOutline[i].l_f_h,req.body.syllabusOutline[i].a_h, db);
-        console.log("runing round: ==> " , i);
-        console.log("response sent2 - " , results2)
-      } catch (err) {
-        error = true;
-        break;
-      }
-       
-    }
-    
-    for(let i =0; i<req.body.prerequisites.length; i++){
-      try {
-        results3 = await insertprerequisites(req.body.courseCode, req.body.prerequisites[i], db);
-        console.log("runing round: ==> " , i);
-        console.log("response sent 3 - " , results3)
-      } catch (err) {
-        error = true;
-        break;
-      }
-    }
-    
-
-    console.log("sylabus out line ==> ", req.body.syllabusOutline.length)
-
-    res.send(results1);
-  }catch(e){
-    error = true;
-    console.log("eeeee ==>",e)
-    res.send({error: true})
-  }
-
-
-
-
-  /////////////////////////////////////////////////////////////////////////
-
-
-  app.post('/insertEvaluationDetails', async (req, res)=>{
+app.get('/courseData', async (req, res)=>{
   
-    const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
-    if(permision[0][0] !=undefined){
-      if(permision[0][0].permision_level>=4){
-        
-
-
-        
-    
-      }else{
-        results = {
-          "code": "insertEvaluationDetails NO ACCESS",
-          "errno": 9999,
-        };
-        res.send(results)
-        }
-  
-    }
-    else{
-      results = {
-        "code": "insertEvaluationDetails NO ACCESS",
-        "errno": 9999,
-      };
-      console.log("you have no permision");
-      res.send(results) 
-    }
-  
-    
-    
-    })
+   let results = {
+     "code": "courseData ROUTE NOT FIRE",
+     "errno": 6010,
+   };
+ 
+   try {
+     let courseData = results;
+     let prerequisites = [];
+     let textReference = [];
+     let allowedDepartments = [];
+     let evaluationDetails = [];
+     let sysllabus = [];
+ 
+     let  result_01 = await getCourseData(req, db);
+ 
+     let result_02 = await getTextReference(req, db);
+     //console.log("\n\ngetTextReference ===>", result_02[0]);
+ 
+     let result_03 = await getAllowedDepartments(req, db);
+     //console.log("\n\ngetAllowedDepartments ===>", result_03[0]);
+ 
+     let result_04 = await getEvaluationDetails(req, db);
+     //console.log("\n\ngetEvaluationDetails ===>", result_04[0]);
+ 
+     let result_05 = await getSysllubus(req, db);
+     //console.log("\n\ngetSysllubus ===>", result_05[0]);
+ 
+     let result_06 = await getPrerequisites(req, db);
+     
+ 
+     if(result_01[0][0] !=undefined){
+       console.log("\n\ngetCourseData ===>", result_01[0][0])
+       courseData = result_01[0][0];
+ 
+       if(result_06[0] != undefined){
+         for(let i =0; i<result_06[0].length; i++){
+           //console.log("\n\nPrerequisites ===>", result_06[0][i]);
+           prerequisites.push(result_06[0][i].prerequisite)
+         }
+       }
+ 
+       if(result_02[0] != undefined){
+         for(let i =0; i<result_02[0].length; i++){
+           //console.log("\n\ngetTextReference ===> ", result_02[0][i].text_referance);
+           textReference.push(result_02[0][i].text_referance)
+         }
+       }
+ 
+       if(result_03[0] != undefined){
+         for(let i =0; i<result_03[0].length; i++){
+           console.log("\n\n getAllowedDepartments ===> ", result_03[0][i].department);
+           allowedDepartments.push(result_03[0][i].department)
+         }
+       }
+ 
+       if(result_04[0] != undefined){
+         for(let i =0; i<result_04[0].length; i++){
+           console.log("\n\n evaluationDetails ===> ", result_04[0][i]);
+           evaluationDetails.push(result_04[0][i])
+         }
+       }
+ 
+       if(result_05[0] != undefined){
+         for(let i =0; i<result_05[0].length; i++){
+           console.log("\n\n sysllabus ===> ", result_05[0][i]);
+           sysllabus.push(result_05[0][i])
+         }
+       }
+ 
+       results = {...courseData, sysllabus, prerequisites, textReference, allowedDepartments, evaluationDetails}
+ 
+ 
+     }else{
+       results = {
+         "code": "courseData SUCH COURSE NOT EXIST",
+         "errno": 6030,
+       };
+     }
+     res.send(results);
+   } catch (error) {
+     res.send(results)
+   }
+ 
+   
+ })
