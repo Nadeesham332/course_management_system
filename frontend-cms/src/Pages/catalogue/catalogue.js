@@ -3,6 +3,7 @@ import Navbar from "../../Navigation/Navbar";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import '../../styles/catalogue.css'
+import Footer from "../../Footer/Footer";
 
 const Catalogue = () => {
   const [acadamicYr, setAcadamicYr] = useState("2020_2021");
@@ -139,7 +140,9 @@ const Catalogue = () => {
               </div>
             </div>
           </div>
+          {courses.length===0 && <h5 className="text-danger text-center">Nothing Scheduled Yet!</h5>}
           </section>
+          <Footer/>
     </>
   );
 };
