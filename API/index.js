@@ -355,6 +355,48 @@ app.post('/insertTextReference', async (req, res)=>{
 
   })
 
+app.post('/insertTextReference', async (req, res)=>{
+  let results = {
+    "code": "insertTextReference ROUTE NOT FIRED",
+    "errno": 5050
+  };
+  const permision = await getPermisionLevel(req.body.usermail , req.body.userpw, db);
+  if(permision[0][0] !=undefined){
+    if(permision[0][0].permision_level>=insertPermissionLevel){
+      
+      for(let i =0; i<req.body.refferance.length; i++){
+        try {
+          results = await insertTextReference(req.body.courseCode,req.body.refferance[i],db);
+        } catch (err) {
+          results = {
+            "code": "insertTextReference ROUTE THROW ERROR",
+            "errno": 5051
+          };
+          break;
+        }  
+      }
+      res.send(results) 
+
+    }else{
+      results = {
+        "code": "insertTextReference NO ACCESS",
+        "errno": 9999,
+      };
+      res.send(results)
+      }
+
+  }
+  else{
+    results = {
+      "code": "insertTextReference NO ACCESS",
+      "errno": 9999,
+    };
+    console.log("you have no permision");
+    res.send(results) 
+  }
+  
+})
+
 app.post('/updateApproval', async (req, res)=>{
   let results = {
     "code": "updateApproval ROUTE NOT FIRED",
@@ -385,11 +427,6 @@ app.post('/updateApproval', async (req, res)=>{
   }
 
 })
-
-
-
-
-
 
 
 
