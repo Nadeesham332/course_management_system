@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Catalogue from "./Pages/catalogue/catalogue";
 import Login from "./Pages/login";
 import Dean from "./Pages/dean/dean";
+import Hod from "./Pages/hod/hod";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./Pages/NotFound";
 import Department from "./Pages/dean/Department";
@@ -29,6 +30,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/dean" element={<Dean />} />
+        </Routes>
+        <Routes>
+          <Route path="/hod" element={<Hod />} />
         </Routes>
         <Routes>
           <Route path="/not_found" element={<NotFound />} />
