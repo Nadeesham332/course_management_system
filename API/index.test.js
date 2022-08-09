@@ -3,9 +3,17 @@ import React from 'react';
 import supertest from 'supertest';
 import index from './index';
 
-describe("Get /courses", () => {
+const express = require("express");
+const request = require("supertest");
 
-    describe("Given a username and password", () => {
+const app = express();
+
+app.use(express.json());
+
+
+describe('Get /courses', () => {
+
+    describe('Given a course detail', () => {
 
         test('should respond with a 200 status code', async () => {
             const response = await request(index).post("/courses").send({
@@ -22,11 +30,5 @@ describe("Get /courses", () => {
         
         
     });
-
-    //describe("when the username and password is missing", () => {
-        
-   // });
-    
-    
-    
+      
 });
