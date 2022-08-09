@@ -1,0 +1,72 @@
+.App {
+    background-color: #ffffff;
+  }
+  
+  .Login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .Login-form {
+    width: 420px;
+    box-shadow: rgb(0,0,0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: white;
+  }
+  
+  .Login-form-title {
+    text-align: left;
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: rgb(29, 9, 85);
+    font-weight: 800;
+  }
+  
+  .HOD-form-title {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: rgb(29, 9, 85);
+    font-weight: 800;
+  }
+  
+  .Login-form-content {
+    padding-left: 25%;
+    padding-right: 12%;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(29, 9, 85);
+  }
+  
+  .button{
+    background-color: rgb(29, 9, 85);
+    color: white;
+    text-align: center;
+  }
+  
+  .HOD-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .HOD-form {
+    box-shadow: rgb(0,0,0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: white;
+  }
+  
+  .HOD-page-container {
+    padding-left: 25%;
+    padding-right: 12%;
+  }

@@ -60,8 +60,7 @@ const config = {
   host:'localhost',
   user:'admin',
   password:'admin',
-  database:'cms_db',
-  timezone: 'utc'
+  database:'cms_db'
 }
 
 var db = createConnection(config);
