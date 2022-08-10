@@ -1,6 +1,14 @@
 import { useRef, useState, useEffect} from 'react';
+import './dean.css'
+import './App.css'
+import Footer from "./Footer.js";
+import Navbar from "./Loggingin_Navbar";
+
+//import axios from 'axios';
+//const LOGIN_URL = '/auth';
 
 const Login = () => {
+    //const{setAuth} = userContext(AuthContext);
     const userRef = useRef();
     const errorRef = useRef();
     
@@ -26,10 +34,12 @@ const Login = () => {
     }
 
     return (
+      <>
+        <Navbar />
       <div className="Login-form-container">
       <form className="Login-form">
         <div className="Login-form-content">
-        <>
+        
             {success ? (
                 <section>
                     <h1>You are successfully logged in!</h1>
@@ -80,10 +90,12 @@ const Login = () => {
             </form>
         </section>
         )}
-        </>
+       
         </div>
       </form>
     </div>
+    <Footer />
+    </>
     )
 }
 
