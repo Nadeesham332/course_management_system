@@ -11,20 +11,17 @@ const app = express();
 app.use(express.json());
 
 
-describe('Get /courses', () => {
+describe('Get /seduledCourse', () => {
 
     describe('Given a course detail', () => {
 
         test('should respond with a 200 status code', async () => {
-            const response = await request(index).post("/courses").send({
-                course_code: "EC4060",
-                parent_course: "NULL",
-                title:"Computer and Data Networks",
-                state:1 ,
-                core_elective: 1,
-                credits: 3
+            const response = await request(index).post("/shedulling").send({
+                academic_year: "2020/2021",
+                semester: 6
+
             })
-            expect(response.send).toBe("list of all courses -> under developing")
+            expect(response.send).toBe(results)
           
         })
         
