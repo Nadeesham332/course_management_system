@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Footer/Footer";
+
+
 const Login = () => {
   const userRef = useRef();
   const errorRef = useRef();
@@ -9,22 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-
-    axios.get('http://localhost:3000/user', {params: {
-      usermail:"kanesh@eng.jfn.ac.lk",
-      userpw:"123"
-    }}) 
-      .then(res => {
-        setCourses(res.data[0]);
-      })
-      .catch(
-        (error) => {
-          console.log('Database not connected!');
-          // setConError(true);
-        }
-      );
-  }, [filter])
+  
 
   useEffect(() => {
     setErrorMessage("");
