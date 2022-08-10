@@ -3,6 +3,7 @@ import Footer from "./Footer.js";
 import { useState } from "react";
 import { useEffect } from "react";
 import './dean.css'
+import './App.css'
 
 const HOD = () => {
   const [userID, setUserId] = useState("");
@@ -28,7 +29,7 @@ const HOD = () => {
         <h4 className="HOD-form-title">HEAD OF THE DEPARTMENT</h4>
         <h3> </h3>
         <section className="greeting">
-          <h5>Hi, Dr. {userID}</h5> 
+          <h5>Hi, Dr.  {userID}</h5> 
         </section>
         <h3> </h3>
         <h3> </h3>
